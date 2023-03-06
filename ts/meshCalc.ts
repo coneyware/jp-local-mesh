@@ -5,14 +5,15 @@
 import * as angleCalc from "./angleCalc.js";
 
 export type MeshInfo = {
-	name: string;
-	kind: number;
-	extend?: boolean;
-	width: string;
-	converter: (_mesh:string) => string;
-	check: (_mesh:string) => boolean;
+	name: string; // メッシュ名称
+	kind: number; // 種別（一次メッシュ:1、二次メッシュ:2、。。。）
+	extend?: boolean; // 拡張（1/10細分メッシュ、1/20細分メッシュ）
+	width: string; // メッシュの間隔（約...）（１次メッシュ:80kmとか1/2メッシュ：500m）
+	converter: (_mesh:string) => string; // 細かいメッシュを大きいメッシュに変換
+	check: (_mesh:string) => boolean; // メッシュコードのフォーマットチェック
 }
 
+/** @type {[number, number]} 緯度,経度 */
 export type LatLng = [number, number];
 
 const kind1 = /^\d{4}$/u;
@@ -156,6 +157,12 @@ export const MESH_INFO: MeshInfo[] = [
 	}
 ];
 
+/**
+ * メッシュコードからメッシュ情報を検索する
+ * @param {string} mesh メッシュコード
+ * @param {boolean} [isExtend=false] 非規程の仕様（1/10細分（１００ｍ）、1/20細分（５０ｍ））
+ * @returns {MeshInfo|null} メッシュ情報
+ */
 export const searchMeshInfo = (mesh:string, isExtend:boolean = false):MeshInfo | null => {
 	if (isExtend) {
 		const ret = MESH_INFO.filter((info) => info.extend)
@@ -183,6 +190,13 @@ const calcAngle = (
 	return {angle, digit, oppositeDigit};
 };
 
+/**
+ * メッシュコードから、対象メッシュの北西、南東の緯度経度を求める
+ * @param {string|number} code メッシュコード
+ * @param {MeshInfo|null} meshInfo メッシュ情報（nullの時はメッシュコードから検索する）
+ * @param {boolean} [isExtend=false] 非規程の仕様（1/10細分（１００ｍ）、1/20細分（５０ｍ））
+ * @returns {LatLng[]} メッシュの緯度経度[[北端緯度,西端経度],[南端緯度,東端経度]]
+ */
 // eslint-disable-next-line max-lines-per-function
 export const meshToLatLng = (
 	code:string|number

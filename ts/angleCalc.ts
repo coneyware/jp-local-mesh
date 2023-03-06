@@ -23,8 +23,13 @@ const secondToAngle = (second:number):Angle => {
 	};
 };
 
+/**
+ * ６０進角度を文字列にする(度°分′秒″)
+ * @param {Angle} source ６０進角度
+ * @returns {string} フォーマット済み文字列
+ */
 export const toString = (source:Angle):string => {
-	return `${source.degree}°${source.minute}'${source.second}''`;
+	return `${source.degree}°${source.minute}′${source.second}″`;
 };
 
 /**

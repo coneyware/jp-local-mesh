@@ -37,6 +37,7 @@ import fs from "fs/promises";
 import {fileURLToPath} from "url";
 
 import {parse} from "csv-parse/sync";
+import fetch from "node-fetch";
 
 import {Command, Option, OptionValues} from "commander";
 
@@ -241,6 +242,7 @@ const meshCsvDownloadAsync = async(prefecture:string, baseDir:string): Promise<m
 		// console.log(`mesh code csv from file:${meshfileName}`);
 		meshlistCsv = await fs.readFile(meshfileName, "utf-8");
 	} catch (_err) {
+		await fs.mkdir(baseDir, {"recursive": true});
 		// console.log(`mesh code csv from net:${URL_MESH_CSV_BASE}${meshlistCsvName}`);
 		meshlistCsv = await fetchTextAsync(`${URL_MESH_CSV_BASE}${meshlistCsvName}`, {}, "Shift_JIS");
 		await fs.writeFile(path.resolve(baseDir, meshlistCsvName), meshlistCsv);
@@ -360,9 +362,8 @@ if (path.parse(process.argv[1]).name
 		.addOption(new Option("-w, --workDir <string>", "作業フォルダ").default(null, "systemのtempフォルダ/mesh"))
 		.addOption(new Option("-o, --outDir <string>", "出力先フォルダ").default(null, "systemのtempフォルダ/mesh"))
 		.addOption(new Option("-p, --prefecture <string>", "都道府県番号").default(null, "番号リストの出力"))
-		.addOption(new Option("-j, --municipalities <string>", "市区町村（カンマ区切り）").default(null, "自治体。番号リストの出力（都道府県指定時）"))
-		.addOption(new Option("-m, --meshWidths <string>", "メッシュ幅（カンマ区切り）").default("1km"))
-		.addOption(new Option("-e, --envfile <string>", "環境変数ファイル").default("../.env"));
+		.addOption(new Option("-j, --municipalities <string>", "市区町村コード（カンマ区切り）").default(null, "自治体。番号リストの出力（都道府県指定時）"))
+		.addOption(new Option("-m, --meshWidths <string>", "メッシュ幅（カンマ区切り）").default("1km"));
 
 	commander.parse(process.argv);
 	const commandlieOptions = commander.opts();
