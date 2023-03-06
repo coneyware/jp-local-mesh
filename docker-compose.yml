@@ -1,0 +1,16 @@
+version: "3"
+services:
+  jp-local-mesh:
+      # env_file:
+      #   - .env
+      build:
+          context: .devcontainer
+          target: ${ARCH:-x64}
+      container_name: "jp-local-mesh"
+      working_dir: /jp-local-mesh
+      volumes:
+          - ./:/jp-local-mesh
+          - /jp-local-mesh/node_modules
+      hostname: "jpLocalMesh"
+      tty: true
+
