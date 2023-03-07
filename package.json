@@ -7,8 +7,7 @@
 	"type": "module",
 	"exports": {
 		".": "./dist/geoJsonMake.js"
-		, "./calc": "./dist/calc.js"
-		, "./angleCalc": "./dist/angleCalc.js"
+		, "./*": "./*"
 	},
 	"scripts": {
 		"build": "tsc -p tsconfig.lib.json",
