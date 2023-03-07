@@ -4,6 +4,6 @@
 		"allowJs": true
 		, "lib": ["esnext", "dom"],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
 	}
-	, "include": ["ts/", "tool/", "*.ts"]
+	, "include": ["ts/", "cli/", "*.ts"]
 	, "exclude": ["dist", "*.cjs"]
 }

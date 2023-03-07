@@ -1,8 +1,8 @@
 {
 	"extends": "./tsconfig.json"
-	, "include": ["tool/meshGeoJsonMake.ts"]
+	, "include": ["cli/*.ts"]
 	, "compilerOptions": {
-		"outDir": "bin",
+		"outFile": "bin/meshGeoJsonMake.js",
 		"declaration": false,
 	}
 }
