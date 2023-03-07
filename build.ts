@@ -25,11 +25,11 @@ const tsBuild = async() => {
 	return build({
 		// define,
 		"entryPoints": entrys
-		, "bundle": true
+		, "bundle": false
 		, "tsconfig": "tsconfig.cli.json"
 		// ビルドされたバンドルの出力先
 		, "outdir": "bin/"
-		, "minify": true
+		, "minify": false
 		, "sourcemap": false
 		, "format": "esm"
 		, "platform": "node"
