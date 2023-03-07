@@ -29,6 +29,7 @@ const tsBuild = async() => {
 		, "tsconfig": "tsconfig.cli.json"
 		// ビルドされたバンドルの出力先
 		, "outdir": "bin/"
+		// , "outfile": "bin/meshGeoJsonMake.js"
 		, "minify": false
 		, "sourcemap": false
 		, "format": "esm"

@@ -31,7 +31,7 @@
 
 import {Command, Option, OptionValues} from "commander";
 
-import geoJsonMake from "../dist/geoJsonMake.js";
+import * as geoJsonMake from "../dist/geoJsonMake.js";
 
 const optionsMakeAsync = async(commandlineOptions: OptionValues): Promise<geoJsonMake.MeshMakeOptions> => {
 	console.log(commandlineOptions);

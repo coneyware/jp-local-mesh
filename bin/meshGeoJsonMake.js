@@ -1,5 +1,5 @@
 import { Command, Option } from "commander";
-import geoJsonMake from "../dist/geoJsonMake.js";
+import * as geoJsonMake from "../dist/geoJsonMake.js";
 const optionsMakeAsync = async (commandlineOptions) => {
   console.log(commandlineOptions);
   const prefecture = commandlineOptions.prefecture;

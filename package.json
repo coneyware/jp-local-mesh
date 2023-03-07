@@ -3,9 +3,12 @@
 	"version": "0.0.1",
 	"description": "日本の地域メッシュの計算・GeoJSON生成",
 	"main": "./dist/geoJsonMake.js",
+	"types": "./dist/geoJsonMake.d.ts",
 	"type": "module",
 	"exports": {
 		".": "./dist/geoJsonMake.js"
+		, "./calc": "./dist/calc.js"
+		, "./angleCalc": "./dist/angleCalc.js"
 	},
 	"scripts": {
 		"build": "tsc -p tsconfig.lib.json",
