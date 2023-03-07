@@ -28,7 +28,18 @@
  * ```
  * @namespace geoJsonMake
  */
-import { MeshMakeOptions, MeshFileInfo } from "./jp-local-mesh.js";
+export type MeshMakeOptions = {
+    prefecture: string;
+    municipalities: string[];
+    outDir: string | null;
+    workDir: string | null;
+    meshWidths: string[];
+};
+export type MeshFileInfo = {
+    "municipality": string;
+    "meshWidth": string;
+    "filename": string;
+};
 export declare const PREFECTURE_CODE_NAMES: {
     [key: string]: string;
 };

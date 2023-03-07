@@ -39,7 +39,20 @@ import {parse} from "csv-parse/sync";
 import fetch from "node-fetch";
 
 import * as meshCalc from "./calc.js";
-import {MeshInfo, MeshMakeOptions, MeshFileInfo} from "./jp-local-mesh.js";
+
+export type MeshMakeOptions = {
+	prefecture: string; // 都道府県コード
+	municipalities: string[]; // 自治体コード
+	outDir: string | null;
+	workDir: string | null;
+	meshWidths: string[];
+};
+
+export type MeshFileInfo = {
+	"municipality": string
+	, "meshWidth": string
+	, "filename": string
+};
 
 const URL_MESH_CSV_BASE = "https://www.stat.go.jp/data/mesh/csv/";
 
@@ -127,7 +140,7 @@ const meshcodeToGeojsonAsync = async(
 	baseDir:string
 	, outputPath:string
 	, codes:string[]
-	, meshInfo:MeshInfo
+	, meshInfo:meshCalc.MeshInfo
 ):Promise<string> => {
 	try {
 		let nlat = 0;
@@ -188,7 +201,7 @@ const meshToGeojsonAsync = async(
 	, outputDir:string
 	, meshs:string[]
 	, kind:number
-	, info: MeshInfo
+	, info: meshCalc.MeshInfo
 ) => {
 	let meshCodes = meshs;
 	if (kind !== info.kind) {
@@ -287,7 +300,7 @@ export const makeAsync = async(commandlineOptions: MeshMakeOptions): Promise<Mes
 			.filter((record) => record["都道府県市区町村コード"].startsWith(muni))
 			.map((mesh) => mesh["基準メッシュ・コード"] ?? mesh["基準メッシュコード"])));
 		const results = await Promise.all(commandlineOptions.meshWidths.map((width) => {
-			const meshInfo = meshCalc.MESH_INFO.find((info:MeshInfo) => info.width === width);
+			const meshInfo = meshCalc.MESH_INFO.find((info:meshCalc.MeshInfo) => info.width === width);
 			if (typeof meshInfo === "undefined") {
 				throw new Error(`メッシュ生成に対応してません（width[${width}]）`);
 			}

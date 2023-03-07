@@ -1,4 +1,13 @@
-import { MeshInfo, LatLng } from "./jp-local-mesh.js";
+export type MeshInfo = {
+    name: string;
+    kind: number;
+    extend?: boolean;
+    width: string;
+    converter: (_mesh: string) => string;
+    check: (_mesh: string) => boolean;
+};
+/** @type {[number, number]} 緯度,経度 */
+export type LatLng = [number, number];
 export declare const MESH_INFO: MeshInfo[];
 /**
  * メッシュコードからメッシュ情報を検索する

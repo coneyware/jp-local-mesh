@@ -31,9 +31,9 @@
 
 import {Command, Option, OptionValues} from "commander";
 
-import {geoJsonMake, MeshMakeOptions} from "../dist/jp-local-mesh.js";
+import geoJsonMake from "../dist/geoJsonMake.js";
 
-const optionsMakeAsync = async(commandlineOptions: OptionValues): Promise<MeshMakeOptions> => {
+const optionsMakeAsync = async(commandlineOptions: OptionValues): Promise<geoJsonMake.MeshMakeOptions> => {
 	console.log(commandlineOptions);
 	const prefecture = commandlineOptions.prefecture as string | null | undefined;
 	const workMunicipalities = commandlineOptions.municipalities as string | null | undefined;

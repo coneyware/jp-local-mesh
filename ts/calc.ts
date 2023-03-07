@@ -4,7 +4,18 @@
 
 import * as angleCalc from "./angleCalc.js";
 
-import {MeshInfo, LatLng} from "./jp-local-mesh.js";
+export type MeshInfo = {
+	name: string; // メッシュ名称
+	kind: number; // 種別（一次メッシュ:1、二次メッシュ:2、。。。）
+	extend?: boolean; // 拡張（1/10細分メッシュ、1/20細分メッシュ）
+	width: string; // メッシュの間隔（約...）（１次メッシュ:80kmとか1/2メッシュ：500m）
+	converter: (_mesh:string) => string; // 細かいメッシュを大きいメッシュに変換
+	check: (_mesh:string) => boolean; // メッシュコードのフォーマットチェック
+}
+
+/** @type {[number, number]} 緯度,経度 */
+export type LatLng = [number, number];
+
 
 const kind1 = /^\d{4}$/u;
 const kind2 = /^\d{6}$/u;
