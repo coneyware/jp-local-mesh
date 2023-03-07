@@ -2,10 +2,11 @@
 	"name": "jp-local-mesh",
 	"version": "0.0.1",
 	"description": "地域メッシュの計算・GeoJSON生成",
-	"main": "./dist/meshGeoJsonMake.js",
+	"main": "./bin/meshGeoJsonMake.js",
 	"type": "module",
 	"exports": {
-		"./*": "./dist/*.js"
+		".": "./dist/jp-local-mesh.js"
+		, "./*": "./dist/*.js"
 	},
 	"scripts": {
 		"build": "tsc -p tsconfig.lib.json",
@@ -14,10 +15,11 @@
 		"prepublishOnly": "npm run build & npm run build_cli"
 	},
 	"bin": {
-		"meshGeoJsonMake": "./dist/meshGeoJsonMake.js"
+		"meshGeoJsonMake": "./bin/meshGeoJsonMake.js"
 	},
 	"files": [
 		"dist"
+		, "bin"
 	],
 	"repository": {
 		"type": "git",
