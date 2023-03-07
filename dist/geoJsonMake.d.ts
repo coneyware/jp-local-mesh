@@ -28,23 +28,12 @@
  * ```
  * @namespace geoJsonMake
  */
+import { MeshMakeOptions, MeshFileInfo } from "./jp-local-mesh.js";
 export declare const PREFECTURE_CODE_NAMES: {
     [key: string]: string;
 };
 export declare const fetchTextAsync: (url: string, option?: object, encoding?: string) => Promise<string>;
-export type MeshMakeOptions = {
-    prefecture: string;
-    municipalities: string[];
-    outDir: string | null;
-    workDir: string | null;
-    meshWidths: string[];
-};
 export declare const getMunicipalitiesAsync: (prefecture: string, workDir?: string | null) => Promise<[string, string][]>;
-export type MeshFileInfo = {
-    "municipality": string;
-    "meshWidth": string;
-    "filename": string;
-};
 /**
  * メッシュからGeoJSONファイルを生成する
  * @global
