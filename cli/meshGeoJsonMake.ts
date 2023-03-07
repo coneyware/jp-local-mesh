@@ -31,7 +31,7 @@
 
 import {Command, Option, OptionValues} from "commander";
 
-import * as geoJsonMake from "./geoJsonMake.js";
+import * as geoJsonMake from "../dist/geoJsonMake.js";
 
 const optionsMakeAsync = async(commandlineOptions: OptionValues): Promise<geoJsonMake.MeshMakeOptions> => {
 	console.log(commandlineOptions);
@@ -83,4 +83,7 @@ const mainAsync = async() => {
 	console.log(result);
 };
 
-await mainAsync();
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
+(async() => {
+	await mainAsync();
+})();

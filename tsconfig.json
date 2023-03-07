@@ -4,7 +4,7 @@
 		"target": "esnext",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
 		"lib": ["esnext"],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
 		// "module": "commonjs",                                /* Specify what module code is generated. */
-		"module": "esnext",            
+		"module": "ESNext",            
 		"moduleResolution": "node",
 		"esModuleInterop": true,
 		// 
