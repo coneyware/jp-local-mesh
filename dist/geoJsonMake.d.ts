@@ -40,10 +40,8 @@ export type MeshFileInfo = {
     "meshWidth": string;
     "filename": string;
 };
-export declare const PREFECTURE_CODE_NAMES: {
-    [key: string]: string;
-};
 export declare const fetchTextAsync: (url: string, option?: object, encoding?: string) => Promise<string>;
+export declare const getPrefectures: () => [string, string][];
 export declare const getMunicipalitiesAsync: (prefecture: string, workDir?: string | null) => Promise<[string, string][]>;
 /**
  * メッシュからGeoJSONファイルを生成する

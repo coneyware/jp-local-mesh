@@ -56,7 +56,7 @@ export type MeshFileInfo = {
 
 const URL_MESH_CSV_BASE = "https://www.stat.go.jp/data/mesh/csv/";
 
-export const PREFECTURE_CODE_NAMES: {[key: string]: string} = {
+const PREFECTURE_CODE_NAMES: {[key: string]: string} = {
 	"01": "北海道"
 	, "02": "青森県"
 	, "03": "岩手県"
@@ -253,6 +253,14 @@ const meshCsvDownloadAsync = async(prefecture:string, baseDir:string): Promise<m
 	}
 	// console.log(path.resolve(baseDir, meshlistCsvName));
 	return parse(meshlistCsv, parserOptions) as meshCsv[];
+};
+
+export const getPrefectures = (): [string, string][] => {
+	return Object.keys(PREFECTURE_CODE_NAMES)
+		.sort()
+		.map((code) => {
+			return [code, PREFECTURE_CODE_NAMES[code]];
+		});
 };
 
 export const getMunicipalitiesAsync = async(prefecture:string, workDir:string|null = null) => {

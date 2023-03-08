@@ -42,14 +42,19 @@ const optionsMakeAsync = async(commandlineOptions: OptionValues): Promise<geoJso
 	const meshWidths = Array.isArray(workMeshWidths) ? workMeshWidths : workMeshWidths.split(",");
 	const workDir = commandlineOptions.workDir as string | null | undefined ?? null;
 	const outDir = commandlineOptions.outDir as string | null | undefined ?? workDir;
+	const prefectures = geoJsonMake.getPrefectures();
 	if (prefecture === null
 		|| typeof prefecture === "undefined"
-		|| typeof geoJsonMake.PREFECTURE_CODE_NAMES[prefecture] === "undefined") {
-		Object.keys(geoJsonMake.PREFECTURE_CODE_NAMES)
-			.sort()
-			.forEach((num: string) => {
-				console.log(`${num} : ${geoJsonMake.PREFECTURE_CODE_NAMES[num]}`);
-			});
+		|| !prefectures.find((info) => info[0] === prefecture)) {
+		// || typeof geoJsonMake.PREFECTURE_CODE_NAMES[prefecture] === "undefined") {
+		prefectures.forEach((preftuple:string[]) => {
+			console.log(`${preftuple[0]} : ${preftuple[1]}`);
+		});
+		// Object.keys(geoJsonMake.PREFECTURE_CODE_NAMES)
+		// 	.sort()
+		// 	.forEach((num: string) => {
+		// 		console.log(`${num} : ${geoJsonMake.PREFECTURE_CODE_NAMES[num]}`);
+		// 	});
 		process.exit();
 	}
 	if (workMunicipalities === null

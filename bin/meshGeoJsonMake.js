@@ -9,9 +9,10 @@ const optionsMakeAsync = async (commandlineOptions) => {
   const meshWidths = Array.isArray(workMeshWidths) ? workMeshWidths : workMeshWidths.split(",");
   const workDir = commandlineOptions.workDir ?? null;
   const outDir = commandlineOptions.outDir ?? workDir;
-  if (prefecture === null || typeof prefecture === "undefined" || typeof geoJsonMake.PREFECTURE_CODE_NAMES[prefecture] === "undefined") {
-    Object.keys(geoJsonMake.PREFECTURE_CODE_NAMES).sort().forEach((num) => {
-      console.log(`${num} : ${geoJsonMake.PREFECTURE_CODE_NAMES[num]}`);
+  const prefectures = geoJsonMake.getPrefectures();
+  if (prefecture === null || typeof prefecture === "undefined" || !prefectures.find((info) => info[0] === prefecture)) {
+    prefectures.forEach((preftuple) => {
+      console.log(`${preftuple[0]} : ${preftuple[1]}`);
     });
     process.exit();
   }

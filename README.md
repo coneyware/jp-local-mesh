@@ -8,7 +8,7 @@
 
 * 使い方（コンソール）
 	```
-	$ npx meshGeoJsonMake -h
+	$ node ./node_modules/jp-local-mesh/bin/meshGeoJsonMake -h
 	Usage: meshGeoJsonMake [options]
 
 	Options:
