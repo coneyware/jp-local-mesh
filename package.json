@@ -18,8 +18,9 @@
 		"meshGeoJsonMake": "./bin/meshGeoJsonMake.js"
 	},
 	"files": [
-		"dist"
-		, "bin"
+		"LICENSE",
+		"dist",
+		"bin"
 	],
 	"repository": {
 		"type": "git",
@@ -49,6 +50,9 @@
 		"@typescript-eslint/eslint-plugin": "^5.54.0",
 		"@typescript-eslint/parser": "^5.54.0",
 		"esbuild": "^0.17.11",
+		"eslint-import-resolver-alias": "^1.1.2",
+		"eslint-import-resolver-typescript": "^3.5.3",
+		"eslint-plugin-import": "^2.27.5",
 		"ts-node": "^10.9.1",
 		"typescript": "^4.9.5"
 	}
