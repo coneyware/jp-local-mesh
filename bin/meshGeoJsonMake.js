@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { Command, Option } from "commander";
 import * as geoJsonMake from "../dist/geoJsonMake.js";
 const optionsMakeAsync = async (commandlineOptions) => {

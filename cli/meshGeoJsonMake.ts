@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * メッシュデータのGeoJSON生成
  * @file
