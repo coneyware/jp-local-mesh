@@ -12,7 +12,7 @@
 	"scripts": {
 		"build": "tsc -p tsconfig.lib.json",
 		"build_cli": "ts-node build.ts",
-		"ts_mesh_make": "ts-node cli/meshGeoJsonMake.ts",
+		"ts_mesh_make": "ts-node cli/meshGeoJsonMake.ts -h",
 		"prepublishOnly": "npm run build & npm run build_cli"
 	},
 	"bin": {

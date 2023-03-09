@@ -33,6 +33,7 @@
 import {Command, Option, OptionValues} from "commander";
 
 import * as geoJsonMake from "../dist/geoJsonMake.js";
+import * as calc from "../dist/calc.js";
 
 const optionsMakeAsync = async(commandlineOptions: OptionValues): Promise<geoJsonMake.MeshMakeOptions> => {
 	console.log(commandlineOptions);
@@ -70,6 +71,8 @@ const optionsMakeAsync = async(commandlineOptions: OptionValues): Promise<geoJso
 };
 
 const mainAsync = async() => {
+	const res = calc.searchMeshInfo("5339221");
+	console.log(res);
 	const commander = new Command();
 
 	commander
@@ -79,7 +82,17 @@ const mainAsync = async() => {
 		.addOption(new Option("-o, --outDir <string>", "出力先フォルダ").default(null, "systemのtempフォルダ/mesh"))
 		.addOption(new Option("-p, --prefecture <string>", "都道府県番号").default(null, "番号リストの出力"))
 		.addOption(new Option("-j, --municipalities <string>", "市区町村コード（カンマ区切り）").default(null, "自治体。番号リストの出力（都道府県指定時）"))
-		.addOption(new Option("-m, --meshWidths <string>", "メッシュ幅（カンマ区切り）").default("1km"));
+		.addOption(new Option("-m, --meshWidths <string>", "メッシュ幅（カンマ区切り）").default("1km"))
+		.on("--help", () => {
+			console.log("対応するメッシュ幅:");
+			calc.MESH_INFO.forEach((info) => {
+				console.log(`	${info.width.padEnd(6, " ")}(${info.name})`);
+			});
+			console.log("Option指定例: 青森県の自治体コード出力");
+			console.log("	meshGeoJsonMake -p 02");
+			console.log("Option指定例: 青森県全県の１・２・３次メッシュをカレントフォルダに生成");
+			console.log("	meshGeoJsonMake -o ./ -p 02 -j 02 -m 80km,10km,1km");
+		});
 
 	commander.parse(process.argv);
 	const commandlieOptions = commander.opts();

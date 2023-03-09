@@ -18,15 +18,15 @@ export type LatLng = [number, number];
 
 
 const kind1 = /^\d{4}$/u;
-const kind2 = /^\d{6}$/u;
-const kind22 = /^\d{6}[0,2,4,6,8][0,2,4,6,8]5$/u;
-const kind25 = /^\d{5}[1-4]$/u;
-const kind3 = /^\d{8}$/u;
-const kind3p2 = /^\d{8}[1-4]$/u;
-const kind3p4 = /^\d{8}[1-4][1-4]$/u;
-const kind3p8 = /^\d{8}[1-4][1-4][1-4]$/u;
-const kind3p10 = /^\d{10}$/u;
-const kind3p20 = /^\d{10}[1-4]$/u;
+const kind2 = /^\d{4}[0-7][0-7]$/u;
+const kind22 = /^\d{4}[0-7][0-7][0,2,4,6,8][0,2,4,6,8]5$/u;
+const kind25 = /^\d{4}[0-7][0-7][1-4]$/u;
+const kind3 = /^\d{4}[0-7][0-7]\d{2}$/u;
+const kind3p2 = /^\d{4}[0-7][0-7]\d{2}[1-4]$/u;
+const kind3p4 = /^\d{4}[0-7][0-7]\d{2}[1-4][1-4]$/u;
+const kind3p8 = /^\d{4}[0-7][0-7]\d{2}[1-4][1-4][1-4]$/u;
+const kind3p10 = /^\d{4}[0-7][0-7]\d{4}$/u;
+const kind3p20 = /^\d{4}[0-7][0-7]\d{4}[1-4]$/u;
 
 export const MESH_INFO: MeshInfo[] = [
 	{
@@ -47,20 +47,6 @@ export const MESH_INFO: MeshInfo[] = [
 			return mesh.substring(0, 6);
 		}
 		, "check": (mesh:string) => kind2.test(mesh)
-	}
-	, {
-		"name": "２倍地域メッシュ"
-		, "kind": 2.2
-		, "width": "2km"
-		, "converter": (mesh:string) => {
-			if (mesh.length < 8) {
-				throw new Error(`Mesh Code convert ng: ${mesh} to 2km mesh.`);
-			}
-			const mesh3lat = Number(mesh.substring(6, 7));
-			const mesh3lng = Number(mesh.substring(7, 8));
-			return `${mesh.substring(0, 6)}${mesh3lat & 0xfe}${mesh3lng & 0xfe}5`;
-		}
-		, "check": (mesh:string) => kind22.test(mesh)
 	}
 	, {
 		"name": "５倍地域メッシュ"
@@ -87,6 +73,20 @@ export const MESH_INFO: MeshInfo[] = [
 			return `${mesh.substring(0, 6)}${num}`;
 		}
 		, "check": (mesh:string) => kind25.test(mesh)
+	}
+	, {
+		"name": "２倍地域メッシュ"
+		, "kind": 2.2
+		, "width": "2km"
+		, "converter": (mesh:string) => {
+			if (mesh.length < 8) {
+				throw new Error(`Mesh Code convert ng: ${mesh} to 2km mesh.`);
+			}
+			const mesh3lat = Number(mesh.substring(6, 7));
+			const mesh3lng = Number(mesh.substring(7, 8));
+			return `${mesh.substring(0, 6)}${mesh3lat & 0xfe}${mesh3lng & 0xfe}5`;
+		}
+		, "check": (mesh:string) => kind22.test(mesh)
 	}
 	, {
 		"name": "三次メッシュ"
@@ -194,14 +194,14 @@ const calcAngle = (
 /**
  * メッシュコードから、対象メッシュの北西、南東の緯度経度を求める
  * @param {string|number} code メッシュコード
- * @param {MeshInfo|null} meshInfo メッシュ情報（nullの時はメッシュコードから検索する）
+ * @param {MeshInfo|null} [meshInfo=null] メッシュ情報（nullの時はメッシュコードから検索する）
  * @param {boolean} [isExtend=false] 非規程の仕様（1/10細分（１００ｍ）、1/20細分（５０ｍ））
  * @returns {LatLng[]} メッシュの緯度経度[[北端緯度,西端経度],[南端緯度,東端経度]]
  */
 // eslint-disable-next-line max-lines-per-function
 export const meshToLatLng = (
 	code:string|number
-	, meshInfo:MeshInfo|null
+	, meshInfo:MeshInfo|null = null
 	, isExtend:boolean = false
 ):LatLng[] => {
 	const scode = code.toString();
