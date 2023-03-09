@@ -1,5 +1,5 @@
 # jp-local-mesh
-地域メッシュの計算・GeoJSON生成
+日本の地域メッシュの計算・GeoJSON生成
 
 * インストール方法
 	```
@@ -40,6 +40,9 @@
 
 ### 対象メッシュコードの取得先
 [総務省統計局の市区町村別メッシュ・コード一覧](https://www.stat.go.jp/data/mesh/m_itiran.html)
+* 都道府県別CSV
+	+ `https://www.stat.go.jp/data/mesh/csv/${都道府県番号}.csv`
+* 三次メッシュ（1km）
 
 ## メッシュコード計算
 * メッシュコードの北西端・南東端の緯度経度取得

@@ -1,6 +1,6 @@
 {
 	"name": "jp-local-mesh",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "日本の地域メッシュの計算・GeoJSON生成",
 	"main": "./dist/jp-local-mesh.js",
 	"types": "./dist/jp-local-mesh.d.ts",
