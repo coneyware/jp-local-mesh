@@ -3,7 +3,7 @@
 #   python3 \
 #   make \
 #   g++ \
-FROM node:18-buster-slim as node
+FROM node:24-bookworm-slim as node
 LABEL maintainer="Coneyware"
 
 ENV LANG=ja_JP.UTF-8 \

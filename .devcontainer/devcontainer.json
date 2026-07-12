@@ -25,12 +25,20 @@
 				// "terminal.integrated.shell.linux": null
 			},
 			"extensions": [
-				"dbaeumer.vscode-eslint"
+				"anthropic.claude-code"
+				, "dbaeumer.vscode-eslint"
 				, "mechatroner.rainbow-csv"
 			]
 		}
 
-	},
+	}
+	, "mounts": [
+		"source=claude-code-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
+		"source=claude-code-config-${devcontainerId},target=/root/.claude,type=volume"
+	],
+	"containerEnv": {
+		"CLAUDE_CONFIG_DIR": "/root/.claude"
+	}
 	// Set *default* container specific settings.json values on container create.
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
@@ -41,7 +49,7 @@
 
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
 	// "postCreateCommand": "apt-get update && apt-get install -y curl",
-	"postCreateCommand": "npm install"
+	, "postCreateCommand": "npm install"
 
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
